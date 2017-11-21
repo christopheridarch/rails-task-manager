@@ -11,6 +11,13 @@ class TasksController < ApplicationController
     @task = Task.new
   end
 
+  def create
+    @task = Task.new(task_params)
+    @task.save
+
+    redirect_to task_path(@task) # => /restaurants/3
+  end
+
   def update
   end
 
@@ -18,6 +25,12 @@ class TasksController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def task_params
+     params.require(:task).permit(:name, :description)
   end
 
 

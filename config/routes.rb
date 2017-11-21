@@ -8,22 +8,8 @@ Rails.application.routes.draw do
 
   post 'tasks', to: 'tasks#create'
 
-  get '/tasks/:id/edit', to: 'tasks#edit'
+  get '/tasks/:id/edit', to: 'tasks#edit', as: 'edit_task'
 
-  # get 'tasks/index'
-
-  # get 'tasks/show'
-
-  # get 'tasks/update'
-
-  # get 'tasks/edit'
-
-  # get 'tasks/destroy'
-
-  # get 'tasks/new'
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-
+  patch 'tasks/:id', to: 'tasks#update'
 
 end

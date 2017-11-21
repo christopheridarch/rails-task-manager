@@ -1,4 +1,8 @@
 class TasksController < ApplicationController
+
+  before_action :set_task, only: [:show, :edit, :update, :destroy]
+  # after_action :redirect, only: [ :edit, :create]
+
   def index
     @tasks = Task.all
   end
@@ -14,7 +18,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     @task.save
-    redirect_to task_path(@task) # => /restaurants/3
+    redirect_to task_path(@task)
   end
 
   def edit
@@ -26,16 +30,24 @@ class TasksController < ApplicationController
     redirect_to task_path(@task)
   end
 
-
-
   def destroy
+    @task = Task.find(params[:id])
+    @task.destroy
+    redirect_to tasks_path
   end
 
   private
 
   def task_params
-     params.require(:task).permit(:name, :description)
+    params.require(:task).permit(:name, :description)
   end
 
+  def set_task
+    @task = Task.find(params[:id])
+  end
+
+  def redirect
+    redirect_to task_path(@task)
+  end
 
 end
